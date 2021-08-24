@@ -23,5 +23,5 @@ Or you can specify version you need
 ```
 Use OpenUPM to add package
 ```
-Soon ™
+Soon™
 ```

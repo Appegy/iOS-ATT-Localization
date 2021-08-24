@@ -11,15 +11,20 @@ using static Appegy.Att.Localization.TransparencyDescriptions;
 
 namespace Appegy.Att.Localization
 {
-    internal class PostProcessorAtt : IPostprocessBuildWithReport
+    internal class AttPostProcessor : IPostprocessBuildWithReport
     {
         public int callbackOrder => PostprocessorOrder;
 
         public void OnPostprocessBuild(BuildReport report)
         {
-            Log($"Started work. Target platform is {report.summary.platform}. Required: {EnabledAutoXcodeUpdate}");
+            Log($"Started work. Target platform is {report.summary.platform}. Required: {EnabledAutoXcodeUpdate}; Has default description: {!string.IsNullOrEmpty(DefaultDescription)}");
             if (report.summary.platform == BuildTarget.iOS && EnabledAutoXcodeUpdate)
             {
+                if (!string.IsNullOrEmpty(DefaultDescription))
+                {
+                    LogError($"You need to specify '{nameof(DefaultDescription).AddSpacesToSentence()}' to use ATT translations.");
+                    return;
+                }
                 var plistPath = report.summary.outputPath + "/Info.plist";
                 var plist = new PlistDocument();
                 plist.ReadFromString(File.ReadAllText(plistPath));
@@ -109,7 +114,12 @@ namespace Appegy.Att.Localization
 
         private static void Log(string message)
         {
-            Debug.Log($"[{nameof(PostProcessorAtt)}]: {message}");
+            Debug.Log($"[{nameof(AttPostProcessor)}]: {message}");
+        }
+
+        private static void LogError(string message)
+        {
+            Debug.LogError($"[{nameof(AttPostProcessor)}]: {message}");
         }
     }
 }

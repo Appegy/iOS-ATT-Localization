@@ -23,14 +23,22 @@ namespace Appegy.Att.Localization
                     GUI.enabled = EnabledAutoXcodeUpdate;
 
                     PostprocessorOrder = EditorGUILayout.IntField(nameof(PostprocessorOrder).AddSpacesToSentence(), PostprocessorOrder);
-                    DefaultDescription = EditorGUILayout.TextField(nameof(DefaultDescription).AddSpacesToSentence(), DefaultDescription);
-
+                    DefaultDescription = EditorGUILayout.TextField($"{Default} [{Default.GetLocalCodeIOS()}] - Default", DefaultDescription);
+                    if (string.IsNullOrEmpty(DefaultDescription))
+                    {
+                        EditorGUILayout.HelpBox($"You need to specify '{nameof(DefaultDescription).AddSpacesToSentence()}' to use translations. Otherwise it won't work", MessageType.Error);
+                    }
+                    GUI.enabled = EnabledAutoXcodeUpdate && !string.IsNullOrEmpty(DefaultDescription);
+                    EditorGUILayout.Space();
                     foreach (SystemLanguage language in Enum.GetValues(typeof(SystemLanguage)))
                     {
-                        if (language == SystemLanguage.Unknown)
+                        switch (language)
                         {
-                            continue;
+                            case Default:
+                            case SystemLanguage.Unknown:
+                                continue;
                         }
+
                         var translation = GetAttDescription(language);
                         var newValue = EditorGUILayout.TextField($"{language} [{language.GetLocalCodeIOS()}]", translation);
                         if (translation != newValue)

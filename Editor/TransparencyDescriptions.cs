@@ -7,15 +7,15 @@ namespace Appegy.Att.Localization
 {
     public class TransparencyDescriptions : ScriptableObject
     {
+        internal const SystemLanguage Default = SystemLanguage.English;
+
         [Serializable]
         private class LanguagesDictionary : SerializableDictionary<int, string>
         {
         }
 
         [SerializeField]
-        private bool _enabledAutoXcodeUpdate;
-        [SerializeField]
-        private string _defaultDescription = "This data will be used to provide you with relevant ads only. It will not be sold or transferred to any third parties.";
+        private bool _enabledAutoXcodeUpdate = true;
         [SerializeField]
         private int _postprocessorOrder;
 
@@ -48,6 +48,7 @@ namespace Appegy.Att.Localization
             {
                 if (GetInstance()._enabledAutoXcodeUpdate != value)
                 {
+                    Undo.RecordObject(GetInstance(), $"Changed {EnabledAutoXcodeUpdate}");
                     GetInstance()._enabledAutoXcodeUpdate = value;
                     Save();
                 }
@@ -61,6 +62,7 @@ namespace Appegy.Att.Localization
             {
                 if (GetInstance()._postprocessorOrder != value)
                 {
+                    Undo.RecordObject(GetInstance(), $"Changed {PostprocessorOrder}");
                     GetInstance()._postprocessorOrder = value;
                     Save();
                 }
@@ -69,32 +71,34 @@ namespace Appegy.Att.Localization
 
         public static string DefaultDescription
         {
-            get => GetInstance()._defaultDescription;
-            set
-            {
-                if (GetInstance()._defaultDescription != value)
-                {
-                    GetInstance()._defaultDescription = value;
-                    Save();
-                }
-            }
+            get => GetAttDescription(Default);
+            set => SetAttDescription(Default, value);
         }
 
         public static string GetAttDescription(SystemLanguage language)
         {
             var inst = GetInstance();
             var result = inst._attDescriptions.TryGetValue((int) language, out var translation) ? translation : string.Empty;
-            return result == GetInstance()._defaultDescription ? string.Empty : result;
+            if (language == Default)
+            {
+                return result;
+            }
+            return result == DefaultDescription ? string.Empty : result;
         }
 
         public static void SetAttDescription(SystemLanguage language, string translation)
         {
-            if (string.IsNullOrEmpty(translation) || translation == GetInstance()._defaultDescription)
+            if (string.IsNullOrEmpty(translation))
+            {
+                RemoveAttDescription(language);
+            }
+            else if (language != Default && translation == DefaultDescription)
             {
                 RemoveAttDescription(language);
             }
             else
             {
+                Undo.RecordObject(GetInstance(), $"Changed Description for {language}");
                 var inst = GetInstance();
                 inst._attDescriptions[(int) language] = translation;
                 Save();
@@ -103,6 +107,7 @@ namespace Appegy.Att.Localization
 
         private static void RemoveAttDescription(SystemLanguage language)
         {
+            Undo.RecordObject(GetInstance(), $"Removed Description for {language}");
             var dict = GetInstance()._attDescriptions;
             if (dict.Remove((int) language))
             {
