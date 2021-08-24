@@ -1,0 +1,11 @@
+{
+  "name": "org.appegy.att-loc",
+  "displayName": "iOS 14 Advertising Support ATT Localization",
+  "description": "Provides localization of App Tracking Transperancy descriptions for Unity's \"iOS 14 Advertising Support\" package.",
+  "version": "1.0.0",
+  "dependencies": {
+    "com.unity.ads.ios-support": "1.0.0"
+  },
+  "unity": "2018.4",
+  "type": "tool"
+}
