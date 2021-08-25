@@ -20,7 +20,7 @@ namespace Appegy.Att.Localization
             Log($"Started work. Target platform is {report.summary.platform}. Required: {EnabledAutoXcodeUpdate}; Has default description: {!string.IsNullOrEmpty(DefaultDescription)}");
             if (report.summary.platform == BuildTarget.iOS && EnabledAutoXcodeUpdate)
             {
-                if (!string.IsNullOrEmpty(DefaultDescription))
+                if (string.IsNullOrEmpty(DefaultDescription))
                 {
                     LogError($"You need to specify '{nameof(DefaultDescription).AddSpacesToSentence()}' to use ATT translations.");
                     return;
