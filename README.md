@@ -48,7 +48,7 @@ public class YourPostProcessor : IPostprocessBuildWithReport
             // Override NSUserTrackingUsageDescription in main Info.plist
             TransparencyDescriptionsAPI.SetAppTransparencyDefaultDescription(buildPath, "Default translation");
             
-            // Sets description for specific language
+            // Set description for specific language
             TransparencyDescriptionsAPI.SetAppTransparencyDescription(buildPath, SystemLanguage.Russian, "Some russian text");
         }
     }
