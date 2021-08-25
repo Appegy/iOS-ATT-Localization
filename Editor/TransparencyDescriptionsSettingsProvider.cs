@@ -6,7 +6,7 @@ using static Appegy.Att.Localization.TransparencyDescriptions;
 
 namespace Appegy.Att.Localization
 {
-    internal static class AttSettingsProvider
+    internal static class TransparencyDescriptionsSettingsProvider
     {
         [SettingsProvider]
         public static SettingsProvider CreateDeviceSimulatorSettingsProvider()
