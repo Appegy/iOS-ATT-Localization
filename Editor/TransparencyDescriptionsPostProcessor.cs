@@ -30,8 +30,7 @@ namespace Appegy.Att.Localization
                 foreach (SystemLanguage language in Enum.GetValues(typeof(SystemLanguage)))
                 {
                     var translation = GetAttDescription(language);
-                    var localeCode = language.GetLocalCodeIOS();
-                    if (string.IsNullOrEmpty(localeCode) || string.IsNullOrEmpty(translation))
+                    if (string.IsNullOrEmpty(translation))
                     {
                         continue;
                     }

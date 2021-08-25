@@ -11,7 +11,7 @@ namespace Appegy.Att.Localization
         [SettingsProvider]
         public static SettingsProvider CreateDeviceSimulatorSettingsProvider()
         {
-            var provider = new SettingsProvider($"Project/iOS 14 ATT Descriptions", SettingsScope.Project)
+            var provider = new SettingsProvider($"Project/iOS ATT Localization", SettingsScope.Project)
             {
                 guiHandler = (searchContext) =>
                 {
@@ -37,6 +37,10 @@ namespace Appegy.Att.Localization
                             case Default:
                             case SystemLanguage.Unknown:
                                 continue;
+                        }
+                        if (language.ToString() == "Hugarian")
+                        {
+                            continue;
                         }
 
                         var translation = GetAttDescription(language);
