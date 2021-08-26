@@ -8,6 +8,8 @@ namespace Appegy.Att.Localization
 {
     internal static class TransparencyDescriptionsSettingsProvider
     {
+        private static HashSet<SystemLanguage> _checkedLanguages = new HashSet<SystemLanguage>();
+        
         [SettingsProvider]
         public static SettingsProvider CreateDeviceSimulatorSettingsProvider()
         {
@@ -30,19 +32,21 @@ namespace Appegy.Att.Localization
                     }
                     GUI.enabled = EnabledAutoXcodeUpdate && !string.IsNullOrEmpty(DefaultDescription);
                     EditorGUILayout.Space();
+                    
+                    _checkedLanguages.Clear();
                     foreach (SystemLanguage language in Enum.GetValues(typeof(SystemLanguage)))
                     {
+                        if (_checkedLanguages.Contains(language))
+                        {
+                            continue;
+                        }
+                        _checkedLanguages.Add(language);
                         switch (language)
                         {
                             case Default:
                             case SystemLanguage.Unknown:
                                 continue;
                         }
-                        if (language.ToString() == "Hugarian")
-                        {
-                            continue;
-                        }
-
                         var translation = GetAttDescription(language);
                         var newValue = EditorGUILayout.TextField($"{language} [{language.GetLocalCodeIOS()}]", translation);
                         if (translation != newValue)
