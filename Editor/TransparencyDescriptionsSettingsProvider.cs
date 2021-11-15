@@ -11,7 +11,7 @@ namespace Appegy.Att.Localization
         private static HashSet<SystemLanguage> _checkedLanguages = new HashSet<SystemLanguage>();
         
         [SettingsProvider]
-        public static SettingsProvider CreateDeviceSimulatorSettingsProvider()
+        public static SettingsProvider CreateAttSettingsProvider()
         {
             var provider = new SettingsProvider($"Project/iOS ATT Localization", SettingsScope.Project)
             {
