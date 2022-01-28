@@ -1,8 +1,9 @@
 # 📓 iOS App Tracking Transparency Localization for Unity
-[![package](https://img.shields.io/badge/version-1.0.0-green)](https://github.com/appegy/att-loc)
+[![openupm](https://img.shields.io/npm/v/org.appegy.att-loc?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/org.appegy.att-loc/)
 
 ## Description
 ![alt](Images/Preview.png)
+
 Provides localization of iOS App Tracking Transparency (ATT) descriptions. Perfectly works with oficial Unity's [iOS 14 Advertising Support](https://docs.unity3d.com/Packages/com.unity.ads.ios-support@1.0/manual/index.html) package.
 
 ## Installation
@@ -13,13 +14,18 @@ Manual add package to the ```manifest.json```.
   ...
 },
 ```
-Or you can specify version you need
 
+Or you can specify version you need
 ```
 "dependencies": {
   "org.appegy.att-loc": "https://github.com/appegy/att-loc.git#1.0.0",
   ...
 },
+```
+
+Or just use [OpenUPM](https://openupm.com/packages/org.appegy.att-loc/)
+```
+openupm add org.appegy.att-loc
 ```
 
 ## Project Settings
