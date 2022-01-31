@@ -55,7 +55,7 @@ public class YourPostProcessor : IPostprocessBuildWithReport
             TransparencyDescriptionsAPI.SetAppTransparencyDefaultDescription(buildPath, "Default translation");
             
             // Set description for specific language
-            TransparencyDescriptionsAPI.SetAppTransparencyDescription(buildPath, SystemLanguage.Russian, "Some russian text");
+            TransparencyDescriptionsAPI.SetAppTransparencyDescription(buildPath, SystemLanguage.Belarusian, "Жыве Беларусь!");
         }
     }
 }

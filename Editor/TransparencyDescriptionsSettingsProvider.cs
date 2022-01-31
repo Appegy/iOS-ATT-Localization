@@ -26,8 +26,6 @@ namespace Appegy.Att.Localization
             _linkedinContent = new GUIContent(_linkedinIcon);
             _githubContent = new GUIContent(_githubIcon);
 
-            Debug.Log(_linkedinIcon != null);
-
             var provider = new SettingsProvider($"Project/iOS ATT Localization", SettingsScope.Project)
             {
                 guiHandler = (searchContext) =>
