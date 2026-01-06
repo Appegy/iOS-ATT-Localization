@@ -15,7 +15,7 @@ namespace Appegy.Att.Localization
 
         public static void AddAppTrackingTransparencyFramework(string buildPath)
         {
-            #if UNITY_IOS
+#if UNITY_IOS
             var projectPath = PBXProject.GetPBXProjectPath(buildPath);
             Log($"{nameof(AddAppTrackingTransparencyFramework)}{Environment.NewLine}" +
                 $"{nameof(buildPath)}: {buildPath}{Environment.NewLine}" +
@@ -25,12 +25,12 @@ namespace Appegy.Att.Localization
             var xcodeTarget = project.GetUnityFrameworkTargetGuid();
             project.AddFrameworkToProject(xcodeTarget, AppTrackingTransparencyFramework, true);
             project.WriteToFile(projectPath);
-            #endif
+#endif
         }
 
         public static void SetAppTransparencyDefaultDescription(string buildPath, string translation)
         {
-            #if UNITY_IOS
+#if UNITY_IOS
             var plistPath = buildPath + "/Info.plist";
             Log($"{nameof(SetAppTransparencyDefaultDescription)}{Environment.NewLine}" +
                 $"{nameof(buildPath)}: {buildPath}{Environment.NewLine}" +
@@ -40,12 +40,12 @@ namespace Appegy.Att.Localization
             plist.ReadFromString(File.ReadAllText(plistPath));
             plist.root.SetString(UserTrackingUsageDescription, translation);
             File.WriteAllText(plistPath, plist.WriteToString());
-            #endif
+#endif
         }
 
         public static void SetAppTransparencyDescription(string buildPath, SystemLanguage language, string translation)
         {
-            #if UNITY_IOS
+#if UNITY_IOS
             var localeCode = language.GetLocalCodeIOS();
             if (string.IsNullOrEmpty(localeCode))
             {
@@ -120,7 +120,7 @@ namespace Appegy.Att.Localization
             var guid = project.AddFolderReference(folderReferencePath, Path.Combine(resourcesDirectoryName, localeSpecificDirectoryName));
             project.AddFileToBuild(unityMainTargetGuid, guid);
             project.WriteToFile(projectPath);
-            #endif
+#endif
         }
 
         internal static void Log(string message)

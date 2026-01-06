@@ -21,6 +21,7 @@ namespace Appegy.Att.Localization
         {
             _linkedinIcon = AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/com.appegy.ios-att-localization/Images/LinkedIn.png");
             _githubIcon = AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/com.appegy.ios-att-localization/Images/Github.png");
+
             _clearButtonStyle = new GUIContent("X", $"Clear translation and use {Default} instead");
             _resetButtonStyle = new GUIContent("R", "Revert translation to Default value");
             _linkedinContent = new GUIContent(_linkedinIcon);
@@ -113,7 +114,7 @@ namespace Appegy.Att.Localization
                     }
                     EditorGUILayout.EndHorizontal();
                 },
-                keywords = new HashSet<string>(new[] {"att", "ios"}),
+                keywords = new HashSet<string>(new[] { "att", "ios" }),
             };
 
             return provider;

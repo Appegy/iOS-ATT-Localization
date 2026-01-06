@@ -22,7 +22,7 @@ namespace Appegy.Att.Localization
             _map.Clear();
             foreach (var pair in this)
             {
-                _map.Add(new Item {Key = pair.Key, Value = pair.Value});
+                _map.Add(new Item { Key = pair.Key, Value = pair.Value });
             }
         }
 

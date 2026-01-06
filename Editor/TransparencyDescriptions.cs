@@ -59,13 +59,13 @@ namespace Appegy.Att.Localization
 
         public static string GetDefaultAttDescription(SystemLanguage language)
         {
-            return _defaults.TryGetValue((int) language, out var translation) ? translation : string.Empty;
+            return _defaults.TryGetValue((int)language, out var translation) ? translation : string.Empty;
         }
 
         public static string GetAttDescription(SystemLanguage language)
         {
             var inst = GetInstance();
-            var result = inst._attDescriptions.TryGetValue((int) language, out var translation) ? translation : string.Empty;
+            var result = inst._attDescriptions.TryGetValue((int)language, out var translation) ? translation : string.Empty;
             if (language == Default)
             {
                 return result;
@@ -87,7 +87,7 @@ namespace Appegy.Att.Localization
             {
                 Undo.RecordObject(GetInstance(), $"Changed Description for {language}");
                 var inst = GetInstance();
-                inst._attDescriptions[(int) language] = translation;
+                inst._attDescriptions[(int)language] = translation;
                 Save();
             }
         }
@@ -96,7 +96,7 @@ namespace Appegy.Att.Localization
         {
             Undo.RecordObject(GetInstance(), $"Removed Description for {language}");
             var dict = GetInstance()._attDescriptions;
-            if (dict.Remove((int) language))
+            if (dict.Remove((int)language))
             {
                 Save();
             }
@@ -168,49 +168,75 @@ namespace Appegy.Att.Localization
 
         private static LanguagesDictionary CreateDefault()
         {
-            return new LanguagesDictionary()
+            var dictionary = new LanguagesDictionary();
+
+            foreach (SystemLanguage language in Enum.GetValues(typeof(SystemLanguage)))
             {
-                {(int) SystemLanguage.Afrikaans, "Hierdie data sal slegs gebruik word om relevante advertensies aan u te verskaf en sal nie aan derde partye verkoop of oorgedra word nie."},
-                {(int) SystemLanguage.Arabic, "سيتم استخدام هذه البيانات لتزويدك بالإعلانات ذات الصلة فقط ولن يتم بيعها أو نقلها إلى أي طرف ثالث."},
-                {(int) SystemLanguage.Basque, "Datu hauek iragarki garrantzitsuak eskaintzeko erabiliko dira eta ez zaizkie hirugarrenei salduko edo transferituko."},
-                {(int) SystemLanguage.Belarusian, "Гэтыя дадзеныя будуць выкарыстоўвацца толькі для прадастаўлення вам адпаведнай рэкламы і не будуць прададзеныя або перададзеныя трэцім бакам."},
-                {(int) SystemLanguage.Bulgarian, "Тези данни ще се използват само за предоставяне на подходящи реклами и няма да бъдат продавани или прехвърляни на трети страни."},
-                {(int) SystemLanguage.Catalan, "Aquestes dades s’utilitzaran només per proporcionar-vos anuncis rellevants i no es vendran ni transferiran a tercers."},
-                {(int) SystemLanguage.Chinese, "这些数据将仅用于向您提供相关广告，不会出售或转让给任何第三方。"},
-                {(int) SystemLanguage.ChineseSimplified, "这些数据将仅用于向您提供相关广告，不会出售或转让给任何第三方。"},
-                {(int) SystemLanguage.ChineseTraditional, "這些數據將僅用於向您提供相關廣告，不會出售或轉讓給任何第三方。"},
-                {(int) SystemLanguage.Czech, "Tato data budou použita pouze k poskytnutí relevantních reklam a nebudou prodána ani převedena žádným třetím stranám."},
-                {(int) SystemLanguage.Danish, "Disse data vil kun blive brugt til at give dig relevante annoncer og vil ikke blive solgt eller overført til tredjemand."},
-                {(int) SystemLanguage.Dutch, "Deze gegevens worden alleen gebruikt om u relevante advertenties te bieden en worden niet verkocht of overgedragen aan derden."},
-                {(int) SystemLanguage.English, "This data will be used to provide you with relevant ads only and will not be sold or transferred to any third parties."},
-                {(int) SystemLanguage.Estonian, "Neid andmeid kasutatakse ainult asjakohaste reklaamide esitamiseks ning neid ei müüda ega edastata kolmandatele osapooltele."},
-                {(int) SystemLanguage.Finnish, "Näitä tietoja käytetään vain osuvien mainosten tarjoamiseen, eikä niitä myydä tai siirretä kolmansille osapuolille."},
-                {(int) SystemLanguage.French, "Ces données seront utilisées uniquement pour vous fournir des publicités pertinentes et ne seront ni vendues ni transférées à des tiers."},
-                {(int) SystemLanguage.German, "Diese Daten werden nur verwendet, um Ihnen relevante Anzeigen bereitzustellen und werden nicht an Dritte verkauft oder weitergegeben."},
-                {(int) SystemLanguage.Greek, "Αυτά τα δεδομένα θα χρησιμοποιηθούν για να σας παρέχουν μόνο σχετικές διαφημίσεις και δεν θα πωληθούν ή θα μεταφερθούν σε τρίτους."},
-                {(int) SystemLanguage.Hebrew, "נתונים אלה ישמשו כדי לספק לך מודעות רלוונטיות בלבד ולא יימכרו או יועברו לצדדים שלישיים כלשהם."},
-                {(int) SystemLanguage.Hungarian, "Ezeket az adatokat arra használjuk fel, hogy csak releváns hirdetéseket jelenítsünk meg Önnek, és nem adjuk el vagy adjuk át harmadik félnek."},
-                {(int) SystemLanguage.Icelandic, "Þessi gögn verða aðeins notuð til að veita þér viðeigandi auglýsingar og verða ekki seldar eða fluttar til þriðja aðila."},
-                {(int) SystemLanguage.Indonesian, "Data ini akan digunakan untuk menyediakan Anda dengan iklan yang relevan saja dan tidak akan dijual atau ditransfer ke pihak ketiga mana pun."},
-                {(int) SystemLanguage.Italian, "Questi dati verranno utilizzati solo per fornire annunci pertinenti e non saranno venduti o trasferiti a terzi."},
-                {(int) SystemLanguage.Japanese, "このデータは、関連する広告を提供するためにのみ使用され、第三者に販売または転送されることはありません。"},
-                {(int) SystemLanguage.Korean, "이 데이터는 관련 광고를 제공하기 위해서만 사용되며 제3자에게 판매되거나 양도되지 않습니다."},
-                {(int) SystemLanguage.Latvian, "Šie dati tiks izmantoti, lai sniegtu jums tikai atbilstošas reklāmas, un tie netiks pārdoti vai nodoti trešajām pusēm."},
-                {(int) SystemLanguage.Lithuanian, "Šie duomenys bus naudojami tik norint pateikti jums atitinkamus skelbimus ir nebus parduodami ar perduodami trečiosioms šalims."},
-                {(int) SystemLanguage.Norwegian, "Disse dataene vil bare bli brukt til å gi deg relevante annonser og vil ikke bli solgt eller overført til tredjeparter."},
-                {(int) SystemLanguage.Polish, "Dane te będą wykorzystywane wyłącznie do dostarczania odpowiednich reklam i nie będą sprzedawane ani przekazywane stronom trzecim."},
-                {(int) SystemLanguage.Portuguese, "Esses dados serão usados apenas para fornecer anúncios relevantes e não serão vendidos ou transferidos a terceiros."},
-                {(int) SystemLanguage.Romanian, "Aceste date vor fi utilizate doar pentru a vă oferi reclame relevante și nu vor fi vândute sau transferate către terți."},
-                {(int) SystemLanguage.Russian, "Эти данные будут использоваться только для предоставления вам релевантной рекламы и не будут проданы или переданы третьим лицам."},
-                {(int) SystemLanguage.SerboCroatian, "Ови подаци ће се користити само за пружање релевантних огласа и неће се продавати нити преносити трећим странама."},
-                {(int) SystemLanguage.Slovak, "Tieto údaje budú použité len k tomu, aby vám poskytli relevantné reklamy a nebudú predané ani prevedené na žiadne tretie strany."},
-                {(int) SystemLanguage.Slovenian, "Ti podatki bodo uporabljeni samo za zagotavljanje ustreznih oglasov in ne bodo prodani ali preneseni tretjim osebam."},
-                {(int) SystemLanguage.Spanish, "Estos datos se utilizarán para proporcionarle anuncios relevantes únicamente y no se venderán ni transferirán a terceros."},
-                {(int) SystemLanguage.Swedish, "Dessa uppgifter kommer endast att användas för att ge dig relevanta annonser och kommer inte att säljas eller överföras till tredje part."},
-                {(int) SystemLanguage.Thai, "ข้อมูลนี้จะถูกนำมาใช้เพื่อให้คุณมีโฆษณาที่เกี่ยวข้องเท่านั้น และจะไม่ขายหรือโอนไปยังบุคคลที่สาม"},
-                {(int) SystemLanguage.Turkish, "Bu veriler yalnızca size ilgili reklamları sağlamak için kullanılacaktır ve herhangi bir üçüncü tarafa satılmayacak veya aktarılmayacaktır."},
-                {(int) SystemLanguage.Ukrainian, "Ці дані будуть використовуватися лише для надання вам релевантної реклами та не будуть продаватися або передаватися третім сторонам."},
-                {(int) SystemLanguage.Vietnamese, "Dữ liệu này sẽ chỉ được sử dụng để cung cấp cho bạn các quảng cáo có liên quan và sẽ không được bán hoặc chuyển giao cho bất kỳ bên thứ ba nào."},
+                if (language == SystemLanguage.Unknown) continue;
+
+                var description = GetDescriptionForLanguage(language);
+
+                if (!string.IsNullOrEmpty(description))
+                {
+                    dictionary[(int)language] = description;
+                }
+                else
+                {
+                    Debug.LogWarning($"[TransparencyDescriptions] Missing default translation for language: {language}");
+                }
+            }
+
+            return dictionary;
+        }
+
+        private static string GetDescriptionForLanguage(SystemLanguage language)
+        {
+            return language switch
+            {
+                SystemLanguage.Afrikaans => "Hierdie data sal slegs gebruik word om relevante advertensies te wys en sal nie aan derde partye verkoop of oorgedra word nie.",
+                SystemLanguage.Arabic => "سيتم استخدام هذه البيانات فقط لتقديم إعلانات تناسب اهتماماتك، ولن يتم بيعها أو نقلها إلى أي طرف ثالث.",
+                SystemLanguage.Basque => "Datu hauek iragarki egokiak erakusteko soilik erabiliko dira, eta ez zaizkie hirugarrenei saldu edo lagako.",
+                SystemLanguage.Belarusian => "Гэтыя даныя будуць выкарыстоўвацца толькі для паказу актуальнай рэкламы і не будуць прададзены або перададзены трэцім асобам.",
+                SystemLanguage.Bulgarian => "Тези данни ще се използват само за предоставяне на подходящи реклами и няма да бъдат продавани или предоставяни на трети страни.",
+                SystemLanguage.Catalan => "Aquestes dades només s'utilitzaran per mostrar anuncis rellevants i no es vendran ni es transferiran a tercers.",
+                SystemLanguage.Chinese => "此数据仅用于向您提供相关广告，不会出售或转让给任何第三方。",
+                SystemLanguage.ChineseSimplified => "此数据仅用于向您提供相关广告，不会出售或转让给任何第三方。",
+                SystemLanguage.ChineseTraditional => "此資料僅用於向您提供相關廣告，不會出售或轉讓給任何第三方。",
+                SystemLanguage.Czech => "Tato data budou použita pouze k zobrazování relevantních reklam a nebudou prodána ani předána třetím stranám.",
+                SystemLanguage.Danish => "Disse data vil kun blive brugt til at vise dig relevante annoncer og vil ikke blive solgt eller videregivet til tredjeparter.",
+                SystemLanguage.Dutch => "Deze gegevens worden alleen gebruikt om relevante advertenties te tonen en worden niet verkocht of overgedragen aan derden.",
+                SystemLanguage.English => "This data will be used to provide you with relevant ads only and will not be sold or transferred to any third parties.",
+                SystemLanguage.Estonian => "Neid andmeid kasutatakse ainult asjakohaste reklaamide kuvamiseks ning neid ei müüda ega edastata kolmandatele isikutele.",
+                SystemLanguage.Faroese => "Hesar dáta verða bert brúktar til at geva tær viðkomandi lýsingar og verða ikki seldar ella latið víðari til triðja part.",
+                SystemLanguage.Finnish => "Näitä tietoja käytetään vain osuvien mainosten näyttämiseen, eikä niitä myydä tai luovuteta kolmansille osapuolille.",
+                SystemLanguage.French => "Ces données seront utilisées uniquement pour vous présenter des publicités pertinentes et ne seront ni vendues ni transférées à des tiers.",
+                SystemLanguage.German => "Diese Daten werden nur verwendet, um Ihnen relevante Werbung anzuzeigen, und werden nicht an Dritte verkauft oder weitergegeben.",
+                SystemLanguage.Greek => "Αυτά τα δεδομένα θα χρησιμοποιηθούν μόνο για την παροχή σχετικών διαφημίσεων και δεν θα πωληθούν ή μεταβιβαστούν σε τρίτους.",
+                SystemLanguage.Hebrew => "נתונים אלה ישמשו להצגת פרסומות רלוונטיות בלבד ולא יימכרו או יועברו לצד שלישי כלשהו.",
+                SystemLanguage.Hindi => "इस डेटा का उपयोग केवल आपको प्रासंगिक विज्ञापन दिखाने के लिए किया जाएगा और इसे किसी भी तीसरे पक्ष को बेचा या हस्तांतरित नहीं किया जाएगा।",
+                SystemLanguage.Hungarian => "Ezeket az adatokat kizárólag releváns hirdetések megjelenítésére használjuk, és nem adjuk el vagy adjuk át harmadik félnek.",
+                SystemLanguage.Icelandic => "Þessi gögn verða eingöngu notuð til að birta þér viðeigandi auglýsingar og verða hvorki seld né afhent þriðja aðila.",
+                SystemLanguage.Indonesian => "Data ini hanya akan digunakan untuk menyediakan iklan yang relevan bagi Anda dan tidak akan dijual atau dialihkan kepada pihak ketiga mana pun.",
+                SystemLanguage.Italian => "Questi dati saranno utilizzati solo per mostrarti annunci pertinenti e non verranno venduti o ceduti a terzi.",
+                SystemLanguage.Japanese => "このデータは、関連性の高い広告を提供するためにのみ使用され、第三者に販売または提供されることはありません。",
+                SystemLanguage.Korean => "이 데이터는 관련 광고를 제공하는 데에만 사용되며 제3자에게 판매되거나 양도되지 않습니다.",
+                SystemLanguage.Latvian => "Šie dati tiks izmantoti tikai, lai nodrošinātu jums atbilstošas reklāmas, un tie netiks pārdoti vai nodoti trešajām personām.",
+                SystemLanguage.Lithuanian => "Šie duomenys bus naudojami tik siekiant pateikti jums aktualius skelbimus ir nebus parduodami ar perduodami trečiosioms šalims.",
+                SystemLanguage.Norwegian => "Disse dataene vil kun bli brukt til å gi deg relevante annonser, og vil ikke bli solgt eller overført til tredjeparter.",
+                SystemLanguage.Polish => "Dane te będą wykorzystywane wyłącznie do wyświetlania dopasowanych reklam i nie będą sprzedawane ani udostępniane stronom trzecim.",
+                SystemLanguage.Portuguese => "Estes dados serão utilizados apenas para lhe fornecer anúncios relevantes e não serão vendidos ou transferidos a terceiros.",
+                SystemLanguage.Romanian => "Aceste date vor fi utilizate doar pentru a vă afișa reclame relevante și nu vor fi vândute sau transferate către terți.",
+                SystemLanguage.Russian => "Эти данные будут использоваться только для показа вам релевантной рекламы и не будут проданы или переданы третьим лицам.",
+                SystemLanguage.SerboCroatian => "Ovi podaci će se koristiti samo za prikazivanje relevantnih oglasa i neće se prodavati niti ustupati trećim stranama.",
+                SystemLanguage.Slovak => "Tieto údaje budú použité len na zobrazovanie relevantných reklám a nebudú predané ani postúpené tretím stranám.",
+                SystemLanguage.Slovenian => "Ti podatki bodo uporabljeni le za prikazovanje ustreznih oglasov in ne bodo prodani ali posredovani tretjim osebam.",
+                SystemLanguage.Spanish => "Estos datos se utilizarán únicamente para mostrarle anuncios relevantes y no se venderán ni transferirán a terceros.",
+                SystemLanguage.Swedish => "Dessa data kommer endast att användas för att visa relevanta annonser och kommer inte att säljas eller överföras till tredje part.",
+                SystemLanguage.Thai => "ข้อมูลนี้จะใช้เพื่อนำเสนอโฆษณาที่เกี่ยวข้องกับคุณเท่านั้น และจะไม่ถูกขายหรือส่งต่อให้แก่บุคคลที่สาม",
+                SystemLanguage.Turkish => "Bu veriler yalnızca size ilgili reklamları göstermek için kullanılacak olup, üçüncü taraflara satılmayacak veya devredilmeyecektir.",
+                SystemLanguage.Ukrainian => "Ці дані будуть використовуватися лише для показу релевантної реклами і не будуть продані чи передані третім сторонам.",
+                SystemLanguage.Vietnamese => "Dữ liệu này sẽ chỉ được sử dụng để cung cấp quảng cáo phù hợp và sẽ không được bán hoặc chuyển giao cho bất kỳ bên thứ ba nào.",
+                _ => string.Empty
             };
         }
     }
