@@ -2,7 +2,13 @@
   "name": "com.appegy.ios-att-localization",
   "displayName": "iOS ATT Localization",
   "description": "Provides localization of App Tracking Transparency (ATT) description - a message that informs the user why an app is requesting permission to use data for tracking the user or the iOS device. Perfectly works with Unity's iOS 14 Advertising Support package.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "unity": "2018.4",
-  "type": "tool"
+  "documentationUrl": "https://github.com/Appegy/iOS-ATT-Localization",
+  "license": "MIT",
+  "author": {
+    "name": "Appegy",
+    "email": "imurashka.me@gmail.com",
+    "url": "https://github.com/Appegy"
+  }
 }
