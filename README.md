@@ -10,7 +10,7 @@ Provides localization of iOS App Tracking Transparency (ATT) descriptions. Perfe
 Manual add package to the ```manifest.json```.
 ```
 "dependencies": {
-  "com.appegy.ios-att-localization": "https://github.com/appegy/ios-att-localization.git",
+  "com.appegy.ios-att-localization": "https://github.com/appegy/ios-att-localization.git?path=/src",
   ...
 },
 ```
@@ -18,7 +18,7 @@ Manual add package to the ```manifest.json```.
 Or you can specify version you need
 ```
 "dependencies": {
-  "com.appegy.ios-att-localization": "https://github.com/appegy/ios-att-localization.git#1.0.0",
+  "com.appegy.ios-att-localization": "https://github.com/appegy/ios-att-localization.git?path=/src#1.0.0",
   ...
 },
 ```
