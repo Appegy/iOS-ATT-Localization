@@ -2,7 +2,7 @@
 [![openupm](https://img.shields.io/npm/v/com.appegy.ios-att-localization?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.appegy.ios-att-localization/)
 
 ## Description
-![alt](Images/Preview.png)
+![alt](images/Preview.png)
 
 Provides localization of iOS App Tracking Transparency (ATT) descriptions. Perfectly works with oficial Unity's [iOS 14 Advertising Support](https://docs.unity3d.com/Packages/com.unity.ads.ios-support@1.0/manual/index.html) package.
 

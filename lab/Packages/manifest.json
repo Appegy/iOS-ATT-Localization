@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.appegy.ios-att-localization": "file:../../src",
     "com.unity.ide.rider": "3.0.40",
     "com.unity.modules.imgui": "1.0.0",
     "com.unity.modules.jsonserialize": "1.0.0",
