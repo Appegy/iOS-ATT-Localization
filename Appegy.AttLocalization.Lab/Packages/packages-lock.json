@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.appegy.ios-att-localization": {
-      "version": "file:com.appegy.ios-att-localization",
+      "version": "file:../../src",
       "depth": 0,
-      "source": "embedded",
+      "source": "local",
       "dependencies": {}
     },
     "com.unity.ext.nunit": {
