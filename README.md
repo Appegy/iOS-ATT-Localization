@@ -2,15 +2,15 @@
 [![openupm](https://img.shields.io/npm/v/com.appegy.ios-att-localization?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.appegy.ios-att-localization/)
 
 ## Description
-![alt](images/Preview.png)
+![iOS ATT Localization settings](images/Preview.png)
 
-Provides localization of iOS App Tracking Transparency (ATT) descriptions. Perfectly works with oficial Unity's [iOS 14 Advertising Support](https://docs.unity3d.com/Packages/com.unity.ads.ios-support@1.0/manual/index.html) package.
+Provides per-language localization of the iOS App Tracking Transparency (ATT) prompt - the message (`NSUserTrackingUsageDescription`) shown when an app asks permission to track the user. iOS shows the prompt in the device language, so a single English string reads out of place for non-English users (and can draw App Store review attention). Set a description per language and the matching Xcode entries are written on build. Works alongside Unity's official [iOS 14 Advertising Support](https://docs.unity3d.com/Packages/com.unity.ads.ios-support@1.0/manual/index.html) package.
 
 ## Installation
 Manual add package to the ```manifest.json```.
 ```
 "dependencies": {
-  "com.appegy.ios-att-localization": "https://github.com/appegy/ios-att-localization.git?path=/src",
+  "com.appegy.ios-att-localization": "https://github.com/Appegy/iOS-ATT-Localization.git?path=/src",
   ...
 },
 ```
@@ -18,7 +18,7 @@ Manual add package to the ```manifest.json```.
 Or you can specify version you need
 ```
 "dependencies": {
-  "com.appegy.ios-att-localization": "https://github.com/appegy/ios-att-localization.git?path=/src#1.1.0",
+  "com.appegy.ios-att-localization": "https://github.com/Appegy/iOS-ATT-Localization.git?path=/src#1.1.1",
   ...
 },
 ```
